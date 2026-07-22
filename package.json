@@ -12,7 +12,7 @@
     "test:coverage": "vitest run --coverage",
     "test:e2e": "playwright test",
     "demo": "tsx scripts/demo.ts",
-    "package": "tsx scripts/package-release.ts",
+    "package": "npm run build && tsx scripts/package-release.ts",
     "release-check": "tsx scripts/release-check.ts"
   },
   "dependencies": {
