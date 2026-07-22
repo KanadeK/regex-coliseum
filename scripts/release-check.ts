@@ -3,6 +3,7 @@ import { existsSync, readFileSync } from 'node:fs'
 import { execFileSync } from 'node:child_process'
 
 const run = (command: string, args: string[]): string => execFileSync(command, args, { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] }).trim()
+const runNpm = (args: string[]): string => execFileSync(npm, args, { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'], shell: process.platform === 'win32' }).trim()
 const grep = (args: string[]): string => {
   try { return run('git', args) }
   catch (cause) {
@@ -26,11 +27,11 @@ if (secret) throw new Error(`Potential secret found:\n${secret}`)
 const shaLine = readFileSync('dist-release/SHA256SUMS.txt', 'utf8').trim()
 const actualSha = createHash('sha256').update(readFileSync(archive)).digest('hex')
 if (shaLine !== `${actualSha}  regex-coliseum-v${version}-web.zip`) throw new Error('SHA256SUMS.txt does not match the release archive.')
-run(npm, ['run', 'lint'])
-run(npm, ['run', 'typecheck'])
-run(npm, ['run', 'test:coverage'])
-run(npm, ['run', 'test:e2e'])
-run(npm, ['run', 'build'])
+runNpm(['run', 'lint'])
+runNpm(['run', 'typecheck'])
+runNpm(['run', 'test:coverage'])
+runNpm(['run', 'test:e2e'])
+runNpm(['run', 'build'])
 const login = run('gh', ['api', 'user', '--jq', '.login'])
 const id = run('gh', ['api', 'user', '--jq', '.id'])
 const apiEmail = run('gh', ['api', 'user', '--jq', '.email // empty'])
