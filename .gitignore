@@ -1,0 +1,11 @@
+node_modules/
+dist/
+dist-release/
+coverage/
+playwright-report/
+test-results/
+debug.log
+.npm-cache/
+.tmp-release-smoke/
+*.tsbuildinfo
+.env
