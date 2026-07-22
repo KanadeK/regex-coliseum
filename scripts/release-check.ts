@@ -2,7 +2,8 @@ import { createHash } from 'node:crypto'
 import { existsSync, readFileSync } from 'node:fs'
 import { execFileSync } from 'node:child_process'
 
-const run = (command: string, args: string[]): string => execFileSync(command, args, { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] }).trim()
+const safeDirectory = process.cwd().replace(/\\/g, '/')
+const run = (command: string, args: string[]): string => execFileSync(command, command === 'git' ? ['-c', `safe.directory=${safeDirectory}`, ...args] : args, { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] }).trim()
 const runNpm = (args: string[]): string => execFileSync(npm, args, { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'], shell: process.platform === 'win32' }).trim()
 const grep = (args: string[]): string => {
   try { return run('git', args) }
