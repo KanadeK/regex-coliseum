@@ -54,6 +54,8 @@ make release-check
 
 `make demo` runs a real fixture. `make package` creates a versioned web archive and SHA-256 digest in `dist-release/`. `make release-check` intentionally requires a clean, committed worktree, release assets, changelog version, and no unfinished markers.
 
+On Windows systems without `make`, use `scripts\verify.cmd`, `scripts\demo.cmd`, `scripts\package_release.cmd`, and `scripts\release_check.cmd`; they invoke the same real commands and preserve failure exit codes.
+
 ## Scope
 
 This MVP teaches JavaScript-style regex behavior. It does not provide multi-user leaderboards, a server-side regex sandbox, PCRE compatibility, or a guarantee of semantic equivalence across every engine.
