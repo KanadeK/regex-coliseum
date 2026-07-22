@@ -18,7 +18,7 @@ for (const file of required) if (!existsSync(file)) throw new Error(`Required re
 if (!readFileSync('CHANGELOG.md', 'utf8').includes(`## [${version}]`)) throw new Error(`CHANGELOG has no ${version} section`)
 const status = run('git', ['status', '--porcelain'])
 if (status) throw new Error('Working tree must be clean for release-check.')
-const unfinishedTerms = ['TODO', 'FIXME', 'NotImplemented', 'place' + 'holder', 'coming soon', 'lorem ipsum'].join('|')
+const unfinishedTerms = ['TO' + 'DO', 'FIX' + 'ME', 'Not' + 'Implemented', 'place' + 'holder', 'coming' + ' soon', 'lorem' + ' ipsum'].join('|')
 const banned = grep(['grep', '-nE', unfinishedTerms, '--', ':!docs/ROADMAP.md'])
 if (banned) throw new Error(`Banned unfinished marker found:\n${banned}`)
 const secret = grep(['grep', '-nE', 'BEGIN( [A-Z]+)? PRIVATE KEY|AKIA[0-9A-Z]{16}|ghp_[A-Za-z0-9]{36}', '--', '.'])
