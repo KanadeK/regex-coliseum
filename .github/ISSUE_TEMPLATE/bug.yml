@@ -1,0 +1,11 @@
+name: Bug report
+description: Report reproducible incorrect behavior
+title: "bug: "
+labels: [bug]
+body:
+  - type: textarea
+    attributes: { label: Steps to reproduce, description: Include challenge, pattern, flags, and expected versus actual behavior. }
+    validations: { required: true }
+  - type: textarea
+    attributes: { label: Environment, description: Browser and operating system. }
+    validations: { required: true }

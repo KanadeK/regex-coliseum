@@ -1,0 +1,11 @@
+name: Feature request
+description: Propose a focused improvement
+title: "feature: "
+labels: [enhancement]
+body:
+  - type: textarea
+    attributes: { label: Problem, description: What learner need is unmet? }
+    validations: { required: true }
+  - type: textarea
+    attributes: { label: Proposed behavior, description: Explain the smallest useful change. }
+    validations: { required: true }
